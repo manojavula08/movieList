@@ -1,0 +1,78 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="8">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="button" />
+            <item index="7" class="java.lang.String" itemvalue="td" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="20">
+            <item index="0" class="java.lang.String" itemvalue="jose" />
+            <item index="1" class="java.lang.String" itemvalue="rsa" />
+            <item index="2" class="java.lang.String" itemvalue="pydantic" />
+            <item index="3" class="java.lang.String" itemvalue="alembic" />
+            <item index="4" class="java.lang.String" itemvalue="greenlet" />
+            <item index="5" class="java.lang.String" itemvalue="SQLAlchemy" />
+            <item index="6" class="java.lang.String" itemvalue="aiofiles" />
+            <item index="7" class="java.lang.String" itemvalue="cffi" />
+            <item index="8" class="java.lang.String" itemvalue="psycopg2-binary" />
+            <item index="9" class="java.lang.String" itemvalue="cryptography" />
+            <item index="10" class="java.lang.String" itemvalue="ecdsa" />
+            <item index="11" class="java.lang.String" itemvalue="h11" />
+            <item index="12" class="java.lang.String" itemvalue="MarkupSafe" />
+            <item index="13" class="java.lang.String" itemvalue="click" />
+            <item index="14" class="java.lang.String" itemvalue="Jinja2" />
+            <item index="15" class="java.lang.String" itemvalue="bcrypt" />
+            <item index="16" class="java.lang.String" itemvalue="fastapi" />
+            <item index="17" class="java.lang.String" itemvalue="starlette" />
+            <item index="18" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="19" class="java.lang.String" itemvalue="uvicorn" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E305" />
+          <option value="E302" />
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="bool.user_name" />
+          <option value="bool.Id" />
+          <option value="bool.username" />
+          <option value="bool.id" />
+          <option value="models" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
