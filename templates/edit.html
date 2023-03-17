@@ -1,18 +1,48 @@
-{% extends 'bootstrap/base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block styles %}
-  {{ super() }}
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-{% endblock %}
-
+{% include 'base.html' %}
 {% block title %}Edit Movies{% endblock %}
 
 {% block content %}
 <div class="content">
-  <h1 class="heading">Movie Title</h1>
-    <p class="description">Edit Movie Rating</p>
+  <div class="card-header">
+        Edit Movie
+    </div>
+    <div class="card-body">
+        <form action="/create" method="post" enctype="multipart/form-data">
+
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label >Year</label>
+                <input type="number" name="year" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label  >description</label>
+                <textarea  rows="3" name="description" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label  >rating</label>
+                <input type="number" name="rating" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>ranking</label>
+                <input type="number" name="ranking" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label >review</label>
+                <input type="text" name="review" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label >file input</label>
+                <input class="form-control" type="file" name="file"/>
+            </div>
+
+            <button type="submit" class="btn btn-outline-dark mt-3">Submit</button>
+
+
+        </form>
+    </div>
   </div>
 {% endblock %}
