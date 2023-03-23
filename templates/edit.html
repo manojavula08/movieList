@@ -7,36 +7,36 @@
         Edit Movie
     </div>
     <div class="card-body">
-        <form action="/create" method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
 
 
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" name="title" class="form-control" required>
+                <input type="text" name="title" class="form-control" value="{{movies.title}}" required>
             </div>
             <div class="form-group">
                 <label >Year</label>
-                <input type="number" name="year" class="form-control" required>
+                <input type="number" name="year" class="form-control" value="{{movies.year}}" required>
             </div>
             <div class="form-group">
                 <label  >description</label>
-                <textarea  rows="3" name="description" class="form-control" required></textarea>
+                <textarea  rows="3" name="description" class="form-control" required>{{movies.description}}</textarea>
             </div>
             <div class="form-group">
                 <label  >rating</label>
-                <input type="number" name="rating" class="form-control" required>
+                <input type="number" name="rating" class="form-control" value="{{movies.rating}}" required>
             </div>
             <div class="form-group">
                 <label>ranking</label>
-                <input type="number" name="ranking" class="form-control" required>
+                <input type="number" name="ranking" class="form-control" value="{{movies.ranking}}" required>
             </div>
             <div class="form-group">
                 <label >review</label>
-                <input type="text" name="review" class="form-control" required>
+                <input type="text" name="review" class="form-control" value="{{movies.review}}" required>
             </div>
             <div class="form-group">
                 <label >file input</label>
-                <input class="form-control" type="file" name="file"/>
+                <input class="form-control" type="file" name="file" value="{{movies.img_url}}">
             </div>
 
             <button type="submit" class="btn btn-outline-dark mt-3">Submit</button>

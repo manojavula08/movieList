@@ -16,7 +16,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine
 from fastapi.templating import Jinja2Templates
 
-router = APIRouter( tags=["Movies"])
+router = APIRouter(tags=["Movies"])
 models.Base.metadata.create_all(bind=engine)
 
 templates = Jinja2Templates(directory="templates")
@@ -50,8 +50,11 @@ async def m_upload_file(file):
     if not os.path.exists(FILEPATH):
         os.makedirs(FILEPATH)
     file_name = file.filename
-    extension = file_name.split(".")[1]
-
+    try:
+        extension = file_name.split(".")[1]
+    except:
+        file_name = "images_dummy.jpg"
+        return file_name
     if file.content_type not in ['image/jpeg', 'image/png']:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail="Only .jpeg or .png  files allowed")
     new_file_name = secrets.token_hex(10) + "." + extension
@@ -83,8 +86,9 @@ async def update_movie(request: Request):
 
 
 @router.post("/create")
-async def create_movie(file: UploadFile = File(...), title: str = Form(...), year: int = Form(...),
-                       rating: int = Form(...), description: str = Form(...), ranking: int = Form(...), review: str = Form(...),
+async def create_movie(file: Optional[UploadFile] = File(...), title: str = Form(...), year: int = Form(...),
+                       rating: int = Form(...), description: str = Form(...), ranking: int = Form(...),
+                       review: str = Form(...),
                        db: Session = Depends(get_db)):
     movie_model = models.Movie()
     movie_model.title = title
@@ -93,11 +97,15 @@ async def create_movie(file: UploadFile = File(...), title: str = Form(...), yea
     movie_model.description = description
     movie_model.ranking = ranking
     movie_model.review = review
-    if file:
+    if file is not None:
+        print(file)
+        print(file.filename)
+        print("asda1")
         output = await m_upload_file(file)
         movie_model.img_url = output
     else:
-        movie_model.img_url = None
+        print("asda2")
+        movie_model.img_url = "images_dummy.jpg"
 
     db.add(movie_model)
     db.commit()
@@ -110,9 +118,21 @@ async def update_movie(request: Request, movie_id: int, db: Session = Depends(ge
     return templates.TemplateResponse("edit.html", {"request": request, "movies": movie_model})
 
 
+def check_url(file):
+    if file in "static/movie/images/":
+        print(type(file))
+        if file == "images_dummy.jpg":
+            print(file)
+            return False
+        return True
+    return False
+
+
 @router.post("/update/{movie_id}", status_code=status.HTTP_201_CREATED)
-async def update_movie(request: Request, movie_id: int, file: Optional[UploadFile] = File(...), title: str = Form(...), year: int = Form(...),
-                       rating: int = Form(...), description: str = Form(...), ranking: int = Form(...), review: str = Form(...),
+async def update_movie(request: Request, movie_id: int, file: Optional[UploadFile] = File(...), title: str = Form(...),
+                       year: int = Form(...),
+                       rating: int = Form(...), description: str = Form(...), ranking: int = Form(...),
+                       review: str = Form(...),
                        db: Session = Depends(get_db)):
     movie_model = db.query(models.Movie).filter(models.Movie.id == movie_id).first()
     movie_model.title = title
@@ -121,14 +141,19 @@ async def update_movie(request: Request, movie_id: int, file: Optional[UploadFil
     movie_model.description = description
     movie_model.ranking = ranking
     movie_model.review = review
-    if movie_model.img_url is not None:
-        await delete_img(movie_model.img_url)
-    movie_model.img_url = await m_upload_file(file=file)
+    if file is not None:
+        check = check_url(file.filename)
+        if not check:
+            await delete_img(movie_model.img_url)
+            movie_model.img_url = await m_upload_file(file=file)
+        else:
+            print("asd2")
+            movie_model.img_url = movie_model.img_url
 
     db.add(movie_model)
     db.commit()
 
-    return templates.TemplateResponse("edit.html", {"request": request, "movies": movie_model})
+    return RedirectResponse(url="/read_data", status_code=status.HTTP_302_FOUND)
 
 
 @router.get("/delete_movie/{movie_id}")
